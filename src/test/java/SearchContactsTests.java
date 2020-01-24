@@ -74,23 +74,13 @@ public class SearchContactsTests extends BaseClass {
         Assert.assertEquals(addressbook.searchContacts(fromAge, toAge).size(), expectedSize);
     }
 
-    @Test(dataProvider = "ageRangeNegativeCase")
-    public void searchByAgeNegativeCase(int fromAge, int toAge, int expectedSize) {
-        Assert.assertEquals(addressbook.searchContacts(fromAge, toAge).size(), expectedSize);
-    }
 
     @DataProvider
     public Object[][] ageRange() {
         return new Object[][]{
                 {1, 20, 1},
                 {20, 50, 2},
-                {50, 99, 1}
-        };
-    }
-
-    @DataProvider
-    public Object[][] ageRangeNegativeCase() {
-        return new Object[][]{
+                {50, 99, 1},
                 {-1, 0, 0},
                 {99, 100, 0}
         };
