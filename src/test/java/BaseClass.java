@@ -1,6 +1,7 @@
 import model.Addressbook;
 import model.ContactData;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 import java.util.*;
@@ -18,7 +19,7 @@ public class BaseClass {
                 new ContactData("Jack", "Jackson", "jj@gmail.com", "+380000715673", new GregorianCalendar(1931, 4, 1)))));
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDownAfterMethod() {
         addressbook.getContacts().clear();
     }

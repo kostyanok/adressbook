@@ -29,18 +29,17 @@ public class ContactData implements Comparable<ContactData> {
     }
 
     public boolean isValid(ContactData contactData) {
-        if ((contactData.getFirstName() == null) && (contactData.getLastName() == null) && (contactData.getMobile() == null) &&
-                (contactData.getEmail() == null) && (contactData.getBirthDate() == null)) {
+        if ((contactData.getFirstName() == null) && (contactData.getLastName() == null) && (contactData.getMobile() == null)) {
             return false;
         } else return true;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return Objects.equals(firstName, that.firstName) && Objects.equals(mobile, that.mobile);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass() || firstName == null || that.firstName == null) return false;
+        return Objects.equals(firstName, that.firstName);
     }
 
     public String getFirstName() {
@@ -85,6 +84,12 @@ public class ContactData implements Comparable<ContactData> {
 
     @Override
     public int compareTo(ContactData contactData) {
-        return contactData.getFirstName().compareTo(this.firstName);
+        if (contactData.getFirstName() != null && this.getFirstName() != null) {
+            return contactData.getFirstName().compareTo(this.firstName);
+        } else if (contactData.getLastName() != null && this.getLastName() != null) {
+            return contactData.getLastName().compareTo(this.lastName);
+        } else {
+            return contactData.getMobile().compareTo(this.mobile);
+        }
     }
 }
