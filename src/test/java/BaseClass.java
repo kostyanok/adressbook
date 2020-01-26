@@ -19,8 +19,8 @@ public class BaseClass {
                 new ContactData("Jack", "Jackson", "jj@gmail.com", "+380000715673", new GregorianCalendar(1931, 4, 1)))));
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDownAfterMethod() {
+    @AfterClass(alwaysRun = true)
+    public void tearDownAfterClass() {
         addressbook.getContacts().clear();
     }
 }

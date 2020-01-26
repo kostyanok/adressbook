@@ -2,6 +2,7 @@ package model;
 
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.Random;
 
 public class ContactData implements Comparable<ContactData> {
 
@@ -10,6 +11,7 @@ public class ContactData implements Comparable<ContactData> {
     private String email;
     private String mobile;
     private Calendar birthDate;
+    private int contactId;
 
     public ContactData(String firstName, String lastName, String email, String mobile, Calendar birthDate) {
         this.firstName = firstName;
@@ -17,15 +19,17 @@ public class ContactData implements Comparable<ContactData> {
         this.email = email;
         this.mobile = mobile;
         this.birthDate = birthDate;
+        this.contactId = new Random().nextInt(1000);
     }
 
     public ContactData(String firstName, String mobile) {
         this.firstName = firstName;
         this.mobile = mobile;
+        this.contactId = new Random().nextInt(1000);
     }
 
     public ContactData() {
-
+        this.contactId = new Random().nextInt(1000);
     }
 
     public boolean isValid(ContactData contactData) {
@@ -40,6 +44,11 @@ public class ContactData implements Comparable<ContactData> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass() || firstName == null || that.firstName == null) return false;
         return Objects.equals(firstName, that.firstName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, mobile);
     }
 
     public String getFirstName() {
@@ -62,6 +71,10 @@ public class ContactData implements Comparable<ContactData> {
         return birthDate;
     }
 
+    public int getContactId() {
+        return contactId;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -82,14 +95,16 @@ public class ContactData implements Comparable<ContactData> {
         this.birthDate = birthDate;
     }
 
+
     @Override
     public int compareTo(ContactData contactData) {
         if (contactData.getFirstName() != null && this.getFirstName() != null) {
-            return contactData.getFirstName().compareTo(this.firstName);
+            return this.getFirstName().compareTo(contactData.getFirstName());
         } else if (contactData.getLastName() != null && this.getLastName() != null) {
-            return contactData.getLastName().compareTo(this.lastName);
+            return this.getLastName().compareTo(contactData.getLastName());
         } else {
-            return contactData.getMobile().compareTo(this.mobile);
+            return this.getMobile().compareTo(contactData.getMobile());
         }
     }
 }
+

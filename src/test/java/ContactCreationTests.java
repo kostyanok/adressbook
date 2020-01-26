@@ -34,4 +34,11 @@ public class ContactCreationTests extends BaseClass {
         addressbook.addContact(contact);
         Assert.assertEquals(addressbook.getErrorMessage(), Error.valueOf("CONTACT_IS_NOT_VALID"));
     }
+
+    @Test
+    public void contactsOrder(){
+        ContactData contact = new ContactData("AAA", "+380929992");
+        addressbook.addContact(contact);
+        Assert.assertEquals(addressbook.getContacts().iterator().next().getFirstName(),contact.getFirstName());
+    }
 }
