@@ -5,7 +5,6 @@ import java.util.*;
 public class Addressbook {
 
     private Set<ContactData> contacts;
-    private ContactData contact = new ContactData();
     private Error errorMessage;
 
     public Addressbook(TreeSet<ContactData> contacts) {
@@ -13,7 +12,7 @@ public class Addressbook {
     }
 
     public void addContact(ContactData contactData) {
-        if (!contact.isValid(contactData)) {
+        if (!contactData.isValid()) {
             errorMessage = Error.valueOf("CONTACT_IS_NOT_VALID");
         } else if (findContact(contactData)) {
             errorMessage = Error.valueOf("CONTACT_ALREADY_EXISTS");
