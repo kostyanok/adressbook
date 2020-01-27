@@ -92,19 +92,31 @@ public class ContactData implements Comparable<ContactData> {
     @Override
     public int compareTo(ContactData contactData) {
         if (contactData.getFirstName() != null && this.getFirstName() != null) {
-            if (contactData.getFirstName().equals(this.getFirstName()) && contactData.getMobile() != null) {
-                return this.getMobile().compareTo(contactData.getMobile());
-            } else {
-                return this.getFirstName().compareTo(contactData.getFirstName());
-            }
+            return compareByFirstName(contactData);
         } else if (contactData.getLastName() != null && this.getLastName() != null) {
-            if (contactData.getLastName().equals(this.getLastName()) && contactData.getMobile() != null) {
+            return compareByLastName(contactData);
+        } else {
+            return this.getMobile().compareTo(contactData.getMobile());
+        }
+    }
+
+    private int compareByFirstName(ContactData contactData) {
+        if (contactData.getFirstName().equals(this.getFirstName())) {
+            if (contactData.getMobile() != null) {
                 return this.getMobile().compareTo(contactData.getMobile());
             } else {
                 return this.getLastName().compareTo(contactData.getLastName());
             }
         } else {
+            return this.getFirstName().compareTo(contactData.getFirstName());
+        }
+    }
+
+    private int compareByLastName(ContactData contactData) {
+        if (contactData.getLastName().equals(this.getLastName()) && contactData.getMobile() != null) {
             return this.getMobile().compareTo(contactData.getMobile());
+        } else {
+            return this.getLastName().compareTo(contactData.getLastName());
         }
     }
 }
